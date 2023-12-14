@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const photosRouter = require("./routers/photosRouter");
 const CategoriesRouter= require ("./routers/categoriesRouter");
 const UserRouter= require("./routers/userRouter");
+const contactRouter = require ("./routers/contactRouter");
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.static("public"));
 app.use("/photo", photosRouter);
 app.use("/category", CategoriesRouter);
 app.use("/user", UserRouter);
+app.use("/contact", contactRouter);
 
 
 
