@@ -35,4 +35,7 @@ body("title").notEmpty().isString().withMessage("devi inserire il titolo"),
 body("description").notEmpty().isString().withMessage("devi inserire la descrizione") , 
 photosController.update);
 
+router.delete('/:slug',
+    param("slug").isLength({ min: 2 }).withMessage("Lo slug deve essere lungo almeno 2 caratteri").isLength({ max: 50 }).withMessage("Lo slug  non deve superare i 50 caratteri"),
+    photosController.destroy);
 module.exports = router;

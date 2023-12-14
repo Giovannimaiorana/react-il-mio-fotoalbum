@@ -170,6 +170,31 @@ async function update(req, res, next) {
         next(error);
     }
 }
+//rotta delete
+async function destroy(req, res) {
+    const dbSlug = req.params.slug;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const photoToDelete = await prisma.photo.findUnique({
+        where: {
+            slug: dbSlug,
+        },
+    });
+    if (!photoToDelete) {
+        return res.status(404).json({ error: "Ila foto non esiste" });
+    }
+    await prisma.photo.delete({
+        where: {
+            slug: dbSlug,
+        },
+    });
+
+    return res.json({ message: "Foto eliminata" });
+}
+
 
 
 module.exports ={
@@ -177,4 +202,5 @@ module.exports ={
     store,
     show,
     update,
+    destroy
 }
